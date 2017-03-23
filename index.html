@@ -102,7 +102,7 @@
        {
            //console.log ("samples/Kit1/" + i + ".wav");
             player[i] = new Tone.Player ("Kit1/" + i + ".wav").toMaster();
-            player.retrigger = true;
+            player[i].retrigger = true;
        }
     }
     
