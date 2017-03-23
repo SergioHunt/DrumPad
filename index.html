@@ -2,17 +2,13 @@
 <html>
     <head>
         <title>DrumPads</title>
-        <meta charset="utf-8">
-        
-        <script src="js/Tone.js" type="text/javascript">
+               <script src="Tone.js" type="text/javascript">
         </script>
         
-        <script src="js/nexusUI.js" type="text/javascript">
-        </script>
+        <script src="nexusUI.js" type="text/javascript">
+            </script>
         
-      
-        
-    <style>
+        <style>
             body, html {
                 
                 width: 100%;
@@ -60,10 +56,9 @@
     
     <body id="mainBody">
         
-        <script src="js/pitchdetect.js"></script>
+        
         
         <div id ="padArea">
-            
             
             <canvas nx="button"></canvas>
             <canvas nx="button"></canvas>
@@ -82,18 +77,28 @@
         <div id="controlBar">
            <canvas nx="tabs"></canvas>
            <canvas nx="toggle"></canvas>
-           
+
        </div>
         
       
     </body>
-    
     <script>
         
         //set up players
         var player = [];
         var buttons = [];
-    
+        
+        //set up microphone
+        navigator.getUserMedia = navigator.getUserMedia ||
+        navigator.webkitGetUserMedia ||
+        navigator.mozGetUserMedia;
+
+        //config
+        var config = {
+        audio: true,
+        video: false,
+        };
+
         //fill array with elements.
         for(var i=1; i<=9; i++) {
             buttons[i] = document.getElementById("button"+i);
@@ -104,10 +109,9 @@
     {
        for(var i=1; i<=9; i++)
        {
-          
-           console.log ("samples/Kit1/" + i + ".wav");
-            player[i] = new Tone.Player ("samples/Kit1/" + i + ".wav").toMaster();
-            player[i].retrigger = true;
+           //console.log ("samples/Kit1/" + i + ".wav");
+            player[i] = new Tone.Player ("Kit1/" + i + ".wav").toMaster();
+            player.retrigger = true;
        }
     }
     
@@ -239,29 +243,6 @@
     
     }
     
-    /*
-    function streamActions(stream)
-    {
-        console.log("streaming");
-        var context = new AudioContext();
-        
-        window.userMediaStream = stream;
-        window.mediaStreamSource = audioContext.createMediaStreamSource(stream);
-        window.analyser = audioContext.createAnalyser();
-        //var audio = document.querySelector('audio');
-        video.srcObject = stream;
-        video.onloadedmetadata = function(e)
-        {
-            // Do something with the video here.
-        };
-    }
-    
-    function streamFailActions(error){
-        console.log("error" + error);
-    }
-*/
-
-       
     
     
 
